@@ -203,7 +203,29 @@ class DB{
 
     //刪除資料
 
+    public function del($id){
+        $sql="DELETE FROM $this->table WHERE ";
+        if(is_array($id)){
 
+            foreach($id as $key => $value){
+        
+                $tmp[]="`$key`='$value'";
+    
+            }
+
+            $sql .= implode(' AND ',$tmp);
+
+        }else{
+
+            $sql .= " id='$id'";
+
+        }
+
+        //echo $sql;
+
+        return $this->pdo->exec($sql);
+    }
+    
     //萬用的查詢
 
 
@@ -234,4 +256,3 @@ echo "</pre>";
 echo "<pre>";
 print_r($db->all());
 echo "</pre>"; */
-?>
